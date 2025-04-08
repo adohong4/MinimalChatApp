@@ -1,4 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:minimal_chat_app/auth/auth_service.dart';
 import 'package:minimal_chat_app/components/my_button.dart';
 import 'package:minimal_chat_app/components/my_textfield.dart';
 
@@ -12,7 +15,34 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, required this.onTap});
 
   // register method
-  void register() {}
+  void register(BuildContext context) async {
+    final _auth = AuthService();
+
+    // password match -> create user
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        _auth.signUpWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text(e.toString())),
+        );
+      }
+    }
+    // passwords dont match -> tell user to fix
+    else {
+      showDialog(
+        context: context,
+        builder:
+            (context) =>
+                const AlertDialog(title: Text("Passwords don't match")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +92,7 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 25),
             // login button
-            MyButton(text: "Register", onTap: register),
+            MyButton(text: "Register", onTap: () => register(context)),
             const SizedBox(height: 25),
             // register button
             Row(

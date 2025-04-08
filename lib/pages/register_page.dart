@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:minimal_chat_app/auth/auth_service.dart';
+import 'package:minimal_chat_app/services/auth/auth_service.dart';
 import 'package:minimal_chat_app/components/my_button.dart';
 import 'package:minimal_chat_app/components/my_textfield.dart';
 

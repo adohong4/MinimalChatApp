@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:minimal_chat_app/auth/auth_service.dart';
+import 'package:minimal_chat_app/services/auth/auth_service.dart';
 import 'package:minimal_chat_app/components/my_button.dart';
 import 'package:minimal_chat_app/components/my_textfield.dart';
 

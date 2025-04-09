@@ -9,17 +9,17 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  //tap to go to register page
+  // Tap to go to register page
   void Function()? onTap;
 
   LoginPage({super.key, required this.onTap});
 
-  // login method
+  // Login method
   void login(BuildContext context) async {
-    //auth service
+    // Auth service
     final authService = AuthService();
 
-    //try login
+    // Try login
     try {
       await authService.signInWithEmailAndPassword(
         _emailController.text,
@@ -37,69 +37,107 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //logo
-            Icon(
-              Icons.message,
-              size: 100,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(height: 50),
-
-            // welcome back message
-            Text(
-              "Welcome back, you've been missed!",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(height: 25),
-
-            // email textfield
-            MyTextfield(
-              hintText: 'Email',
-              obscureText: false,
-              controller: _emailController,
-            ),
-            const SizedBox(height: 10),
-            // pw textfield
-            MyTextfield(
-              hintText: 'Password',
-              obscureText: true,
-              controller: _passwordController,
-            ),
-
-            const SizedBox(height: 25),
-            // login button
-            MyButton(text: "Login", onTap: () => login(context)),
-            const SizedBox(height: 25),
-            // register button
-            Row(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ), // Padding ngang cho toàn bộ nội dung
+          child: Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Logo
+                Icon(
+                  Icons.person,
+                  size: 80,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                const SizedBox(height: 25),
+
+                // Welcome back message
                 Text(
-                  "Not a member? ",
+                  "Welcome back, you've been missed!",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
+                    fontSize: 16,
                   ),
                 ),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Text(
-                    "Register here",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
+                const SizedBox(height: 25),
+
+                // Email textfield
+                MyTextfield(
+                  hintText: 'Email',
+                  obscureText: false,
+                  controller: _emailController,
+                ),
+                const SizedBox(height: 10),
+
+                // Password textfield
+                MyTextfield(
+                  hintText: 'Password',
+                  obscureText: true,
+                  controller: _passwordController,
+                ),
+                const SizedBox(height: 10),
+
+                // Forgot password
+                Padding(
+                  padding: const EdgeInsets.only(right: 25),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Forgot Password feature coming soon!",
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                const SizedBox(height: 25),
+
+                // Login button
+                MyButton(text: "Login", onTap: () => login(context)),
+                const SizedBox(height: 25),
+
+                // Register button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Not a member? ",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 14,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: onTap,
+                      child: Text(
+                        "Register here",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

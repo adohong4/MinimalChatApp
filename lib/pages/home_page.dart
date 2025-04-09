@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Home'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.grey,
         elevation: 0,
       ),

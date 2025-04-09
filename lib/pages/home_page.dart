@@ -87,16 +87,23 @@ class HomePage extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: posts.length,
                   itemBuilder: (context, index) {
-                    //get each individual post
+                    // Get each individual post
                     final post = posts[index];
 
-                    // get data from each post
+                    // Get data from each post
                     String message = post['PostMessage'];
                     String userEmail = post['UserEmail'];
                     Timestamp timestamp = post['TimeStamp'];
 
-                    // return as a list tile
-                    return MyListTile(title: message, subTitle: userEmail);
+                    // Convert Timestamp to DateTime
+                    DateTime postDateTime = timestamp.toDate();
+
+                    // Return as a list tile
+                    return MyListTile(
+                      message: message,
+                      userEmail: userEmail,
+                      timestamp: postDateTime,
+                    );
                   },
                 ),
               );

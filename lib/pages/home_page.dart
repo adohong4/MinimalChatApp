@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:minimal_chat_app/components/my_drawer.dart';
 import 'package:minimal_chat_app/components/user_tile.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Home'),
         backgroundColor: Colors.transparent,
